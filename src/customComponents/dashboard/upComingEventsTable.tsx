@@ -51,7 +51,9 @@ const UpComingEventsTable = (props: DashboardUpComingTableProps) => {
   };
 
   return (
-    <div className="border-x-zinc-100 h-full lg:h-[370px] lg:min-w-[385px] rounded-lg bg-[#FFFFFF] w-full">
+    <div className="border-x-zinc-100 h-[270px] lg:h-[370px] lg:min-w-[385px] rounded-lg bg-[#FFFFFF] w-full relative overflow-hidden">
+      <div className="lg:hidden bg-gradient-to-t from-[#FFFFFF] to-transparent absolute bottom-0 h-[120px] w-full pointer-events-none" />
+
       <div>
         <h1 className="text-2xl py-4 text-left px-4 font-[400]">
           Upcoming Events

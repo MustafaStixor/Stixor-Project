@@ -15,12 +15,12 @@ const DashboardHeader = (props: DashboardHeaderProps) => {
   const [showMobileTabs, setShowMobileTabs] = useState(false);
 
   return (
-    <div className="flex flex-row items-left justify-around xl:justify-start w-full py-3 bg-[#FFFFFF] h-16">
-      <Avatar className="xl:ml-7 lg:mr-40 ml-6 md:ml-4">
+    <div className="flex flex-row items-left justify-evenly xl:justify-start w-full py-3 bg-[#FFFFFF] h-16">
+      <Avatar className="xl:ml-7 ml-6 md:ml-4">
         <AvatarImage src="/Assets/Stixor-Logo.png" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
-      <div className="xl:w-1/3 w-2/3 xl:ml-[-70px] mx-3 relative">
+      <div className="lg:w-1/3 w-2/3 lg:mx-52 mx-3 relative">
         <Search size={20} className="absolute left-3 top-2" />
         <div>
           <Input

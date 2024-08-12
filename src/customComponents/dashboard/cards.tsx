@@ -51,7 +51,7 @@ const DashboardCards = (props: dashboardCardsProps) => {
           <h1 className="my-2 lg:my-auto font-[600] text-[#797D8C] text-[14px]">
             All Events
           </h1>
-          <p className="my-2 lg:my-auto font-[700] text-[22px]  text-[#04103B]">
+          <p className="my-2 lg:my-auto font-[700] text-[22px] sm:text-[32px]  text-[#04103B]">
             {formatNumber(totalEventCount)}
           </p>
         </div>
@@ -61,7 +61,7 @@ const DashboardCards = (props: dashboardCardsProps) => {
           <h1 className="mt-1 lg:my-auto font-[600] text-balance text-[#797D8C] text-[14px]">
             This Months Events
           </h1>
-          <p className="mb-2 lg:my-auto font-[700] lg:mr-[-8px] text-[22px] text-[#04103B]">
+          <p className="mb-2 lg:my-auto font-[700] lg:mr-[-8px] text-[22px] sm:text-[32px] text-[#04103B]">
             {formatNumber(thisMonthEventCount)}
           </p>
         </div>
@@ -71,7 +71,7 @@ const DashboardCards = (props: dashboardCardsProps) => {
           <h1 className="my-2 lg:my-auto font-[600] text-balance text-[#797D8C] text-[14px]">
             Favorite Events
           </h1>
-          <p className="my-2  lg:my-auto font-[700] text-[22px] text-[#04103B]">
+          <p className="my-2  lg:my-auto font-[700] text-[22px] sm:text-[32px] text-[#04103B]">
             {formatNumber(props.favouriteEvents)}
           </p>
         </div>

@@ -37,7 +37,7 @@ const EventDialog: React.FC<EventDialogProps> = ({
   }, [setOpenModal]);
 
   return (
-    <div className="fixed inset-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="fixed inset-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
       <Card ref={modalRef} className="fixed lg:w-[792px] w-[370px] h-auto">
         <div>
           {/* Visible on lg: and hidden otherwise */}
@@ -47,7 +47,7 @@ const EventDialog: React.FC<EventDialogProps> = ({
                 {modalRow.title}
               </div>
 
-              <div className="lg:bg-[#ECEAFF] lg:text-[#5041BC] lg:px-3 rounded-lg text-[14px] lg:py-1 min-w-[194px] text-left lg:text-right text-pretty">
+              <div className="lg:bg-[#ECEAFF] lg:text-[#5041BC] lg:px-3 rounded-lg text-[14px] py-2 lg:py-1 min-w-[194px] text-left lg:text-right text-pretty">
                 {moment(modalRow.start).format("ddd D MMM YYYY hh:mm A")}
               </div>
             </div>
