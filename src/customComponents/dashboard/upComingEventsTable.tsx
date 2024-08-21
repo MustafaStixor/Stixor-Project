@@ -4,19 +4,19 @@ import moment from "moment";
 import TableSkeleton from "./tableSkeleton";
 import { CircularProgress } from "@mui/material";
 import { Event } from "@/types";
-import { getData } from "@/services";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useStore } from "@/stores";
 
-interface DashboardUpComingTableProps {
-  setFavoriteEvents: (favouriteEvents: Event[]) => void;
-  favouriteEvents: Event[];
-}
+interface DashboardUpComingTableProps {}
 
 const UpComingEventsTable = (props: DashboardUpComingTableProps) => {
-  const [data, setData] = useState<Event[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const {
+    upComingEventsTableData,
+    setUpComingEventsTableData,
+    favouriteEvents,
+    setFavouriteEvents,
+  } = useStore();
 
   useEffect(() => {
     const handleData = () => {
@@ -27,9 +27,7 @@ const UpComingEventsTable = (props: DashboardUpComingTableProps) => {
         offset: 0,
       };
 
-      getData(params).then((response) => {
-        setData(response.results);
-      });
+      setUpComingEventsTableData(params);
     };
     handleData();
   }, []);
@@ -41,13 +39,9 @@ const UpComingEventsTable = (props: DashboardUpComingTableProps) => {
       sort: "start",
       offset: (page + 1) * 10 - 10,
     };
-    getData(params).then((response) => {
-      setData([...data, ...response.results]);
+    setUpComingEventsTableData(params);
 
-      setLoading(false);
-      setPage(page + 1);
-      setHasMore(response.results.length > 0);
-    });
+    setPage(page + 1);
   };
 
   return (
@@ -62,7 +56,7 @@ const UpComingEventsTable = (props: DashboardUpComingTableProps) => {
 
       <InfiniteScroll
         height={292}
-        dataLength={data.length}
+        dataLength={upComingEventsTableData.length}
         next={fetchMoreData}
         hasMore={true}
         loader={
@@ -77,42 +71,40 @@ const UpComingEventsTable = (props: DashboardUpComingTableProps) => {
         }
       >
         <div className="grid grid-cols-2 lg:grid-cols-1 pr-1 gap-2 px-2 lg:px-0">
-          {data.length === 0 ? (
+          {upComingEventsTableData.length === 0 ? (
             <div className="bg-[#F1F1F1] col-span-2 xl:col-span-1 ">
               <TableSkeleton />
             </div>
           ) : null}
-          {data.map((col: Event, index: number) => (
+          {upComingEventsTableData.map((col: Event, index: number) => (
             <div
               key={index}
-              className="grid grid-cols-5 text-left justify-around p-1 lg:mx-3 border-2 border-[#F3F3F3] rounded-lg h-fit bg-[#FFFFFF]"
+              className="grid grid-cols-5 text-left justify-around p-1 lg:mx-3 border-2 border-[#F3F3F3] rounded-lg h-fit bg-white"
             >
               <div className="col-span-4 grid-row-2">
                 <div className="lg:size-4 text-black font-[600] lg:w-full min-h-7 truncate row-span-1">
                   {col.title}
                 </div>
-                <div className="row-span-1 text-[#797D8C] text-sm font-[400]">
+                <div className="row-span-1 text-[#797D8C] text-sm font-normal">
                   {moment(col.start).format("ddd D MMM hh:mm A")}
                 </div>
               </div>
               <Heart
                 className={`w-9 lg:pr-4 pr-2 col-span-1 m-auto ${
-                  props.favouriteEvents.some((event) => event.id === col.id)
+                  favouriteEvents.some((event) => event.id === col.id)
                     ? "fill-red-600"
                     : ""
                 }`}
                 color={
-                  props.favouriteEvents.some((event) => event.id === col.id)
+                  favouriteEvents.some((event) => event.id === col.id)
                     ? "red-600"
                     : "#5041BC"
                 }
                 onClick={() =>
-                  props.setFavoriteEvents(
-                    props.favouriteEvents.some((event) => event.id === col.id)
-                      ? props.favouriteEvents.filter(
-                          (event) => event.id !== col.id
-                        )
-                      : [...props.favouriteEvents, col]
+                  setFavouriteEvents(
+                    favouriteEvents.some((event) => event.id === col.id)
+                      ? favouriteEvents.filter((event) => event.id !== col.id)
+                      : [...favouriteEvents, col]
                   )
                 }
               />

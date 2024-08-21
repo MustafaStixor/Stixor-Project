@@ -15,19 +15,12 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 import { ListEnd } from "lucide-react";
+import { useStore } from "@/stores";
 
-interface DropdownMenuProps {
-  startDate: Date;
-  endDate: Date;
-  category: string;
-
-  setCategory: (category: string) => void;
-  setStartDate: (startDate: Date) => void;
-  setEndDate: (endDate: Date) => void;
-  setPage: (page: number) => void;
-}
+interface DropdownMenuProps {}
 
 export function DropdownMenuCheckboxes(props: DropdownMenuProps) {
+  const { tableFilter, setTableFilter } = useStore();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,10 +32,9 @@ export function DropdownMenuCheckboxes(props: DropdownMenuProps) {
         <DropdownMenuLabel>Category</DropdownMenuLabel>
         <Select
           onValueChange={(e) => {
-            props.setCategory(e);
-            props.setPage(1);
+            setTableFilter({ category: e, page: 1 });
           }}
-          value={props.category}
+          value={tableFilter.category}
         >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select Category" />
@@ -76,10 +68,9 @@ export function DropdownMenuCheckboxes(props: DropdownMenuProps) {
             <span>From:</span>
             <br />
             <DatePicker
-              date={props.startDate}
+              date={tableFilter.startDate}
               setDate={(e: Date) => {
-                props.setStartDate(e);
-                props.setPage(1);
+                setTableFilter({ startDate: e, page: 1 });
               }}
             />
           </div>
@@ -87,10 +78,9 @@ export function DropdownMenuCheckboxes(props: DropdownMenuProps) {
             <span>To:</span>
             <br />
             <DatePicker
-              date={props.endDate}
+              date={tableFilter.endDate}
               setDate={(e: Date) => {
-                props.setEndDate(e);
-                props.setPage(1);
+                setTableFilter({ endDate: e, page: 1 });
               }}
             />
           </div>

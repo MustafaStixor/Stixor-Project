@@ -1,9 +1,9 @@
 import axios from "axios";
-import { APIresponse } from "@/types";
+import { APIresponse, APIparameters } from "@/types";
 require("dotenv");
 
 const API_KEY = process.env.NEXT_PUBLIC_PREDICTHQ_API_KEY;
-const getData = async (params: any): Promise<APIresponse> => {
+const getData = async (params: APIparameters): Promise<APIresponse> => {
   try {
     const response = await axios.get("https://api.predicthq.com/v1/events", {
       headers: {
@@ -18,7 +18,9 @@ const getData = async (params: any): Promise<APIresponse> => {
   }
 };
 
-const getTotalEventsCount = async (params: any): Promise<APIresponse> => {
+const getTotalEventsCount = async (
+  params: APIparameters
+): Promise<APIresponse> => {
   try {
     const response = await axios.get(
       "https://api.predicthq.com/v1/events/count",

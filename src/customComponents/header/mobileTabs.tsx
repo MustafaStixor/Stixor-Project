@@ -1,10 +1,10 @@
-"use client"; // Indicates that this component uses client-side rendering
+"use client";
 
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 
 interface DashboardMobileTabsProps {
-  setTab: React.Dispatch<React.SetStateAction<"dashboard" | "favourites">>;
+  setTab: (newTab: "dashboard" | "favourites") => void;
   setShowMobileTabs: (show: boolean) => void;
 }
 

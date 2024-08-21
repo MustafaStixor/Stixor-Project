@@ -1,86 +1,65 @@
-// pages/dashboard.tsx
 import { useState, useEffect } from "react";
 import { DropdownMenuCheckboxes } from "./dropDownMenu";
 import { Heart } from "lucide-react";
-import { ListEnd } from "lucide-react";
 import moment from "moment";
 import EventDialog from "./eventDialog";
 import TableSkeleton from "./tableSkeleton";
-import { getData } from "../../services";
 import CircularProgress from "@mui/material/CircularProgress";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Event } from "@/types";
+import { APIparameters, Event } from "@/types";
+import { useStore } from "@/stores";
 
-interface DashboardTableProps {
-  setFavoriteEvents: (favouriteEvents: Event[]) => void;
-  favouriteEvents: Event[];
-}
+interface DashboardTableProps {}
 
 const DashboardTable = (props: DashboardTableProps) => {
-  const [category, setCategory] = useState("all");
-  const [startDate, setStartDate] = useState<any>();
-  const [endDate, setEndDate] = useState<any>();
   const [openModal, setOpenModal] = useState(false);
   const [modalRow, setModalRow] = useState<any>();
-  const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const { tableData, setTableData } = useStore();
+  const { favouriteEvents, setFavouriteEvents, tableFilter } = useStore();
 
   useEffect(() => {
     setLoading(true);
     const handleData = () => {
-      const params = {
+      const params: APIparameters = {
         limit: 10,
-        category: category === "all" ? undefined : category,
-        "start.lte": endDate ? moment(endDate).format("YYYY-MM-DD") : undefined,
-        "start.gte": startDate
-          ? moment(startDate).format("YYYY-MM-DD")
+        category:
+          tableFilter.category === "all" ? undefined : tableFilter.category,
+        "start.lte": tableFilter.endDate
+          ? moment(tableFilter.endDate).format("YYYY-MM-DD")
+          : undefined,
+        "start.gte": tableFilter.startDate
+          ? moment(tableFilter.startDate).format("YYYY-MM-DD")
           : undefined,
         offset: 0,
       };
 
-      getData(params).then((response) => {
-        setData(response.results);
-
-        setLoading(false);
-      });
+      setTableData(params);
     };
     handleData();
-  }, [category, startDate, endDate]);
+  }, [tableFilter.category, tableFilter.startDate, tableFilter.endDate]);
 
   const fetchMoreData = () => {
     const params = {
       limit: 10,
-      category: category === "all" ? undefined : category,
-      "start.lte": endDate ? moment(endDate).format("YYYY-MM-DD") : undefined,
-      "start.gte": startDate
-        ? moment(startDate).format("YYYY-MM-DD")
+      category:
+        tableFilter.category === "all" ? undefined : tableFilter.category,
+      "start.lte": tableFilter.endDate
+        ? moment(tableFilter.endDate).format("YYYY-MM-DD")
         : undefined,
-      offset: (page + 1) * 10 - 10,
+      "start.gte": tableFilter.startDate
+        ? moment(tableFilter.startDate).format("YYYY-MM-DD")
+        : undefined,
+      offset: ((tableFilter.page || 0) + 1) * 10 - 10,
     };
-    getData(params).then((response) => {
-      setData([...data, ...response.results]);
-
-      setLoading(false);
-      setPage(page + 1);
-      setHasMore(response.results.length > 0);
-    });
+    setTableData(params);
   };
 
   return (
     <div className="w-auto mb-2 xl:mb-0 mt-3 xl:mt-0 xl:min-h-[520px]">
       <div className="flex flex-row justify-between pb-2 mx-3">
         <p className="w-auto text-2xl font-[600] mb-2">Events List</p>
-        <DropdownMenuCheckboxes
-          startDate={startDate}
-          endDate={endDate}
-          category={category}
-          setCategory={setCategory}
-          setStartDate={setStartDate}
-          setEndDate={setEndDate}
-          setPage={setPage}
-        />
+        <DropdownMenuCheckboxes />
       </div>
       {openModal && (
         <EventDialog modalRow={modalRow} setOpenModal={setOpenModal} />
@@ -88,7 +67,7 @@ const DashboardTable = (props: DashboardTableProps) => {
 
       <InfiniteScroll
         height={464}
-        dataLength={data.length}
+        dataLength={tableData.length}
         next={fetchMoreData}
         hasMore={true}
         loader={
@@ -116,12 +95,12 @@ const DashboardTable = (props: DashboardTableProps) => {
             <div className="col-span-1 font-[600]"></div>
             <hr className="h-px border-[#6A6A6A] col-span-7" />
             <div className="col-span-7 xl:min-w-[650px]">
-              {data.length === 0 ? (
+              {tableData.length === 0 ? (
                 <div className="xl:min-w-[890px] overflow-hidden">
                   <TableSkeleton />
                 </div>
               ) : null}
-              {data.map((row: any, index: number) => (
+              {tableData.map((row: any, index: number) => (
                 <div
                   onClick={() => {
                     setOpenModal(true);
@@ -150,28 +129,28 @@ const DashboardTable = (props: DashboardTableProps) => {
                   <div onClick={(e) => e.stopPropagation()}>
                     <Heart
                       className={`w-9 m-auto md:ml-10 ${
-                        props.favouriteEvents?.find(
+                        favouriteEvents?.find(
                           (event: any) => event.id == row.id
                         )
                           ? "fill-red-600"
                           : ""
                       }`}
                       color={
-                        props.favouriteEvents?.find(
+                        favouriteEvents?.find(
                           (event: any) => event.id == row.id
                         )
                           ? "red-600"
                           : "#5041BC"
                       }
                       onClick={() =>
-                        props.setFavoriteEvents(
-                          props.favouriteEvents?.find(
+                        setFavouriteEvents(
+                          favouriteEvents?.find(
                             (event: any) => event.id == row.id
                           )
-                            ? props.favouriteEvents.filter(
+                            ? favouriteEvents.filter(
                                 (event: any) => event.id !== row.id
                               )
-                            : [...props.favouriteEvents, row]
+                            : [...favouriteEvents, row]
                         )
                       }
                     />

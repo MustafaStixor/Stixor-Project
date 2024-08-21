@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card } from "../../ui/card";
 import { getTotalEventsCount } from "@/services";
 import moment from "moment";
+import { useStore } from "@/stores";
 
 const formatNumber = (num: number): string => {
   if (num >= 1000000000) {
@@ -15,13 +16,12 @@ const formatNumber = (num: number): string => {
   }
 };
 
-interface dashboardCardsProps {
-  favouriteEvents: number;
-}
+interface dashboardCardsProps {}
 
 const DashboardCards = (props: dashboardCardsProps) => {
   const [totalEventCount, setTotalEventCount] = useState(0);
   const [thisMonthEventCount, setThisMonthEventCount] = useState(0);
+  const { favouriteEvents } = useStore();
 
   useEffect(() => {
     const handleData = () => {
@@ -72,7 +72,7 @@ const DashboardCards = (props: dashboardCardsProps) => {
             Favorite Events
           </h1>
           <p className="my-2  lg:my-auto font-[700] text-[22px] sm:text-[32px] text-[#04103B]">
-            {formatNumber(props.favouriteEvents)}
+            {formatNumber(favouriteEvents.length)}
           </p>
         </div>
       </Card>

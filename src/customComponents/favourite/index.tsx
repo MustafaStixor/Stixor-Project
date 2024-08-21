@@ -1,16 +1,13 @@
 import React from "react";
 import { Heart } from "lucide-react";
 import moment from "moment";
-import { DropdownMenuCheckboxItem } from "../../ui/dropdown-menu";
-import { ListEnd } from "lucide-react";
 import { Event } from "../../types/index";
+import { useStore } from "@/stores";
 
-interface FavouritesTabProps {
-  favouriteEvents: Event[];
-  setFavoriteEvents: (events: Event[]) => void;
-}
+interface FavouritesTabProps {}
 
 const FavouritesTab: React.FC<FavouritesTabProps> = (props) => {
+  const { favouriteEvents, setFavouriteEvents } = useStore();
   return (
     <div className="mt-8 overflow-hidden">
       <div className="flex flex-row justify-start">
@@ -30,7 +27,7 @@ const FavouritesTab: React.FC<FavouritesTabProps> = (props) => {
             <hr className="h-px border-[#6A6A6A] col-span-7" />
           </div>
           <div>
-            {props.favouriteEvents.map((row: Event, index: number) => (
+            {favouriteEvents.map((row: Event, index: number) => (
               <div
                 key={row.id}
                 className="grid grid-cols-7 p-2 border-1 my-2 rounded-lg bg-[#FFFFFF]"
@@ -45,24 +42,22 @@ const FavouritesTab: React.FC<FavouritesTabProps> = (props) => {
                 <div>
                   <Heart
                     className={`w-9 m-auto ${
-                      props.favouriteEvents.some((event) => event.id === row.id)
+                      favouriteEvents.some((event) => event.id === row.id)
                         ? "fill-red-600"
                         : ""
                     }`}
                     color={
-                      props.favouriteEvents.some((event) => event.id === row.id)
+                      favouriteEvents.some((event) => event.id === row.id)
                         ? "red-600"
                         : "#5041BC"
                     }
                     onClick={() =>
-                      props.setFavoriteEvents(
-                        props.favouriteEvents.some(
-                          (event) => event.id === row.id
-                        )
-                          ? props.favouriteEvents.filter(
+                      setFavouriteEvents(
+                        favouriteEvents.some((event) => event.id === row.id)
+                          ? favouriteEvents.filter(
                               (event) => event.id !== row.id
                             )
-                          : [...props.favouriteEvents, row]
+                          : [...favouriteEvents, row]
                       )
                     }
                   />

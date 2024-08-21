@@ -1,14 +1,12 @@
-// components/DashboardHeader.tsx
 import React, { useState } from "react";
 import { Input } from "../../ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
-import Image from "next/image";
 import { ListMinus, Search } from "lucide-react";
 import DashboardMobileTabs from "./mobileTabs";
 
 interface DashboardHeaderProps {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<"dashboard" | "favourites">>;
+  tab: "dashboard" | "favourites"; 
+  setTab: (newTab: "dashboard" | "favourites") => void; 
 }
 
 const DashboardHeader = (props: DashboardHeaderProps) => {

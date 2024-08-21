@@ -4,17 +4,24 @@ import DashboardHeader from "../customComponents/header";
 import DashboardNavBar from "../customComponents/navbar";
 import DashboardTab from "../customComponents/dashboard";
 import FavouritesTab from "../customComponents/favourite";
-import { getData } from "../services";
-import { Event } from "../types/index";
 import moment from "moment";
+import { useStore } from "@/stores";
 
 const Home: React.FC = () => {
   const [tab, setTab] = useState<"dashboard" | "favourites">("dashboard");
-  const [favouriteEvents, setFavoriteEvents] = useState<Event[]>([]);
-  const [eventOfTheMonth, setEventOfTheMonth] = useState<Event>();
+  const { eventOfTheMonth, setEventOfTheMonth } = useStore();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const path = window.location.pathname;
+    const hash = window.location.hash;
+
+    if (hash === "#favourites" || path.includes("favourites")) {
+      setTab("favourites");
+    } else {
+      setTab("dashboard");
+    }
+
     const fetchEventOfTheMonth = async () => {
       setLoading(true);
       const params = {
@@ -23,8 +30,7 @@ const Home: React.FC = () => {
       };
 
       try {
-        const response = await getData(params);
-        setEventOfTheMonth(response.results[0]);
+        await setEventOfTheMonth(params);
       } catch (error) {
         console.error("Failed to fetch event of the month:", error);
       } finally {
@@ -33,33 +39,32 @@ const Home: React.FC = () => {
     };
 
     fetchEventOfTheMonth();
-  }, []);
+  }, [setEventOfTheMonth]);
+
+  const handleTabChange = (newTab: "dashboard" | "favourites") => {
+    setTab(newTab);
+    const newPath = newTab === "favourites" ? "#favourites" : "#dashboard";
+    window.history.replaceState({}, "", newPath);
+  };
 
   return (
     <div className="App bg-[#F1F1F1] h-screen w-screen xl:overflow-clip overflow-y-scroll">
       <div className="flex flex-row items-center justify-center">
-        <DashboardHeader setTab={setTab} tab={""} />
+        <DashboardHeader setTab={handleTabChange} tab={tab} />
       </div>
       <div className="flex flex-row items-stretch justify-start">
         <div className="justify-start">
-          <DashboardNavBar setTab={setTab} tab={tab} />
+          <DashboardNavBar setTab={handleTabChange} tab={tab} />
         </div>
         <div className="h-[85%] xl:p-4 w-screen">
           {tab === "dashboard" ? (
             eventOfTheMonth ? (
-              <DashboardTab
-                setFavoriteEvents={setFavoriteEvents}
-                favouriteEvents={favouriteEvents}
-                eventOfTheMonth={eventOfTheMonth!}
-              />
+              <DashboardTab eventOfTheMonth={eventOfTheMonth!} />
             ) : (
               ""
             )
           ) : (
-            <FavouritesTab
-              setFavoriteEvents={setFavoriteEvents}
-              favouriteEvents={favouriteEvents}
-            />
+            <FavouritesTab />
           )}
         </div>
       </div>
