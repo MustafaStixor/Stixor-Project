@@ -20,7 +20,7 @@ const DashboardTab = (props: DashboardTabProps) => {
             <DashboardCards></DashboardCards>
           </div>
         </div>
-        <div>
+        <div className="xl:max-w-[27%]">
           <div>
             <UpComingEventsTable />
           </div>
