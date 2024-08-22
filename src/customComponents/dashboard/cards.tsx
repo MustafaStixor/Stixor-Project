@@ -46,7 +46,7 @@ const DashboardCards = (props: dashboardCardsProps) => {
 
   return (
     <div className="flex flex-row justify-evenly w-auto mt-2 truncate mx-2 lg:mx-0">
-      <Card className="rounded-lg w-[33%] text-left lg:mx-2 mx-1 lg:mr-2 lg:h-14 xl:h-14 h-[110px] bg-[#FFFFFF]">
+      <Card className="rounded-lg w-[33%] text-left lg:mx-2 mx-1 lg:mr-2 lg:h-14 xl:h-14 h-[110px] bg-secondary">
         <div className="flex flex-col lg:flex-row text-center justify-between h-full px-2 lg:px-4">
           <h1 className="my-2 lg:my-auto font-[600] text-[#797D8C] text-[14px]">
             All Events
@@ -56,7 +56,7 @@ const DashboardCards = (props: dashboardCardsProps) => {
           </p>
         </div>
       </Card>
-      <Card className="rounded-lg w-[33%] text-left lg:mx-2 mx-1 lg:mr-2 lg:h-14 xl:h-14 h-[110px] bg-[#FFFFFF]">
+      <Card className="rounded-lg w-[33%] text-left lg:mx-2 mx-1 lg:mr-2 lg:h-14 xl:h-14 h-[110px] bg-secondary">
         <div className="flex flex-col lg:flex-row text-center justify-between h-full px-2 lg:px-4">
           <h1 className="mt-1 lg:my-auto font-[600] text-balance text-[#797D8C] text-[14px]">
             This Months Events
@@ -66,7 +66,7 @@ const DashboardCards = (props: dashboardCardsProps) => {
           </p>
         </div>
       </Card>
-      <Card className="rounded-lg w-[33%] text-left lg:mx-2 mx-1 lg:mr-2 lg:h-14 xl:h-14 h-[110px] bg-[#FFFFFF]">
+      <Card className="rounded-lg w-[33%] text-left lg:mx-2 mx-1 lg:mr-2 lg:h-14 xl:h-14 h-[110px] bg-secondary">
         <div className="flex flex-col lg:flex-row text-center justify-between h-full px-2 lg:px-4">
           <h1 className="my-2 lg:my-auto font-[600] text-balance text-[#797D8C] text-[14px]">
             Favorite Events

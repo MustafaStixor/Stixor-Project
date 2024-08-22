@@ -56,7 +56,7 @@ const DashboardTable = (props: DashboardTableProps) => {
   };
 
   return (
-    <div className="w-auto mb-2 xl:mb-0 mt-3 xl:mt-0 xl:min-h-[520px]">
+    <div className="w-full mb-2 xl:mb-0 mt-3 xl:mt-0 xl:min-h-[520px]">
       <div className="flex flex-row justify-between pb-2 mx-3">
         <p className="w-auto text-2xl font-[600] mb-2">Events List</p>
         <DropdownMenuCheckboxes />
@@ -84,7 +84,7 @@ const DashboardTable = (props: DashboardTableProps) => {
         <div className="w-auto overflow-x-auto lg:overflow-x-hidden mx-3">
           <div
             className={`grid grid-cols-7 gap-2 md:text-2xl max-h-4/5 text-lg text-wrap text-black text-left min-w-[650px] ${
-              loading ? "xl:min-w-[898px]" : ""
+              loading ? "xl:min-w-[850px]" : ""
             }`}
           >
             <div className="col-span-1 pl-4 font-[600]">#</div>
@@ -106,7 +106,7 @@ const DashboardTable = (props: DashboardTableProps) => {
                     setOpenModal(true);
                     setModalRow(row);
                   }}
-                  className="col-span-7 text-wrap grid grid-cols-7 border-1 my-2  p-2 rounded-lg bg-[#FFFFFF] font-normal text-base cursor-pointer"
+                  className="col-span-7 text-wrap grid grid-cols-7 border-1 my-2  p-2 rounded-lg bg-secondary font-normal text-base cursor-pointer"
                   key={index}
                 >
                   <div className="text-black font-[600] col-span-1 xl:ml-2 ">

@@ -48,7 +48,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="App bg-[#F1F1F1] h-screen w-screen xl:overflow-clip overflow-y-scroll">
+    <div className="App bg-primary h-screen w-screen xl:overflow-clip overflow-y-scroll">
       <div className="flex flex-row items-center justify-center">
         <DashboardHeader setTab={handleTabChange} tab={tab} />
       </div>

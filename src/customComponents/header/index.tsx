@@ -13,7 +13,7 @@ const DashboardHeader = (props: DashboardHeaderProps) => {
   const [showMobileTabs, setShowMobileTabs] = useState(false);
 
   return (
-    <div className="flex flex-row items-left justify-evenly xl:justify-start w-full py-3 bg-[#FFFFFF] h-16">
+    <div className="flex flex-row items-left justify-evenly xl:justify-start w-full py-3 bg-secondary h-16">
       <Avatar className="xl:ml-7 ml-6 md:ml-4">
         <AvatarImage src="/Assets/Stixor-Logo.png" />
         <AvatarFallback>CN</AvatarFallback>

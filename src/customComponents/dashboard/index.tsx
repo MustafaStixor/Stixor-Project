@@ -21,10 +21,10 @@ const DashboardTab = (props: DashboardTabProps) => {
           </div>
         </div>
         <div>
-          <div className="xl:max-h-[370px] mx-3 xl:mx-0 mb-2 xl:mb-0 mt-3 xl:mt-0 m-2 xl:m-0">
+          <div>
             <UpComingEventsTable />
           </div>
-          <div className="hidden xl:block ">
+          <div className="hidden xl:block mr-2">
             <EventOfTheMonthCard eventOfTheMonth={props.eventOfTheMonth} />
           </div>
         </div>

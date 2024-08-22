@@ -10,7 +10,7 @@ interface DashboardNavBarProps {
 
 const DashboardNavBar: React.FC<DashboardNavBarProps> = ({ tab, setTab }) => {
   return (
-    <div className="p-3 w-16 hidden xl:block lg:h-[100%] xl:h-[600px] my-4 ml-4 space-y-8 rounded-full bg-[#FFFFFFE5]">
+    <div className="p-3 w-16 hidden xl:block lg:h-[100%] xl:h-[600px] my-4 ml-4 space-y-8 rounded-full bg-secondary">
       <div
         className={`rounded-full cursor-pointer p-2 ${
           tab === "dashboard" ? "bg-[#ECEAFF]" : "bg-[#F8F9FB]"

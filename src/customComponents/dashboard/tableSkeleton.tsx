@@ -7,7 +7,7 @@ const TableSkeleton: React.FC = () => {
       {Array.from({ length: 10 }, (_, index) => (
         <Skeleton
           key={index}
-          className=" h-[40px] rounded-lg bg-[#FFFFFF] my-2"
+          className=" h-[40px] rounded-lg bg-secondary my-2"
         />
       ))}
     </div>

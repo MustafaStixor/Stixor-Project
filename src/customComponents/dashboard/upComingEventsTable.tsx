@@ -45,8 +45,8 @@ const UpComingEventsTable = (props: DashboardUpComingTableProps) => {
   };
 
   return (
-    <div className="border-x-zinc-100 h-[270px] lg:h-[370px] lg:min-w-[385px] rounded-lg bg-[#FFFFFF] w-full relative overflow-hidden">
-      <div className="lg:hidden bg-gradient-to-t from-[#FFFFFF] to-transparent absolute bottom-0 h-[120px] w-full pointer-events-none" />
+    <div className="border-x-zinc-100 h-[270px] lg:h-[370px] lg:min-w-[385px] xl:min-w-min w-[98%] rounded-lg bg-secondary relative overflow-hidden mx-2 xl:mx-0 mb-2 xl:mb-0 mt-3 xl:mt-0 m-2 xl:m-0">
+      <div className="lg:hidden bg-gradient-to-t from-secondary to-transparent absolute bottom-0 h-[120px] w-full pointer-events-none" />
 
       <div>
         <h1 className="text-2xl py-4 text-left px-4 font-[400]">
@@ -72,7 +72,7 @@ const UpComingEventsTable = (props: DashboardUpComingTableProps) => {
       >
         <div className="grid grid-cols-2 lg:grid-cols-1 pr-1 gap-2 px-2 lg:px-0">
           {upComingEventsTableData.length === 0 ? (
-            <div className="bg-[#F1F1F1] col-span-2 xl:col-span-1 ">
+            <div className="bg-primary col-span-2 xl:col-span-1 ">
               <TableSkeleton />
             </div>
           ) : null}

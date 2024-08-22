@@ -27,7 +27,7 @@ const EventOfTheMonthCard = (props: EventOfTheMonthProps) => {
           </div>
         </div>
         <div className="flex-row mx-3 mb-3">
-          <div className="bg-[#FFFFFF] border-spacing-10 flex-wrap justify-content-between rounded-lg grid grid-cols-2">
+          <div className="bg-secondary border-spacing-10 flex-wrap justify-content-between rounded-lg grid grid-cols-2">
             <div className="col-span-1 text-left pl-4 py-2 font-bold text-[#5041BC]">
               {eventOfTheMonth.title}
             </div>

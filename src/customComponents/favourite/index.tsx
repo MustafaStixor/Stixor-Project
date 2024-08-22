@@ -30,7 +30,7 @@ const FavouritesTab: React.FC<FavouritesTabProps> = (props) => {
             {favouriteEvents.map((row: Event, index: number) => (
               <div
                 key={row.id}
-                className="grid grid-cols-7 p-2 border-1 my-2 rounded-lg bg-[#FFFFFF]"
+                className="grid grid-cols-7 p-2 border-1 my-2 rounded-lg bg-secondary"
               >
                 <div className="font-bold col-span-1">
                   {(index + 1).toString().padStart(2, "0")}
