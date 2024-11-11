@@ -1,17 +1,11 @@
-import axios from "axios";
 import { APIresponse, APIparameters } from "@/types";
+import { eventsList, eventCount } from "./mocks";
 require("dotenv");
 
-const API_KEY = process.env.NEXT_PUBLIC_PREDICTHQ_API_KEY;
 const getData = async (params: APIparameters): Promise<APIresponse> => {
   try {
-    const response = await axios.get("https://api.predicthq.com/v1/events", {
-      headers: {
-        Authorization: `Bearer ${API_KEY}`,
-      },
-      params: params,
-    });
-    return response.data;
+    const response = eventsList;
+    return response as any;
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
@@ -22,16 +16,8 @@ const getTotalEventsCount = async (
   params: APIparameters
 ): Promise<APIresponse> => {
   try {
-    const response = await axios.get(
-      "https://api.predicthq.com/v1/events/count",
-      {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-        },
-        params: params,
-      }
-    );
-    return response.data;
+    const response = eventCount;
+    return response as any;
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
