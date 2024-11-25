@@ -21,7 +21,9 @@ const useStore = create<Store>()(
     (set) => ({
       tableData: [],
       setTableData: (parameters: APIparameters) => {
+        console.log(123)
         getData(parameters).then((response) => {
+          
           set((state) => ({
             tableData:
               parameters.offset === 0
@@ -32,6 +34,7 @@ const useStore = create<Store>()(
       },
       upComingEventsTableData: [],
       setUpComingEventsTableData: (parameters: APIparameters) => {
+        console.log(456)
         getData(parameters).then((response) => {
           set((state) => ({
             upComingEventsTableData: [
@@ -58,9 +61,10 @@ const useStore = create<Store>()(
       },
       eventOfTheMonth: null,
       setEventOfTheMonth: (parameters: APIparameters) => {
+        console.log(789)
         getData(parameters).then((response) => {
           set({
-            eventOfTheMonth: response.results[0],
+            eventOfTheMonth: response.results?.[0],
           });
         });
       },

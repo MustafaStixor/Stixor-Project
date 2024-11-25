@@ -9,6 +9,7 @@ interface EventOfTheMonthProps {
 }
 
 const EventOfTheMonthCard = (props: EventOfTheMonthProps) => {
+
   const { eventOfTheMonth } = props;
   return (
     <div className="w-auto mt-3 h-auto lg:min-w-[326px] mx-2 xl:mx-0 mb-2 xl:mb-0">

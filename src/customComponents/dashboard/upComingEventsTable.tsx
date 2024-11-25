@@ -37,7 +37,7 @@ const UpComingEventsTable = (props: DashboardUpComingTableProps) => {
       "start.lte": moment().endOf("month").format("YYYY-MM-DD"),
       "start.gte": moment().format("YYYY-MM-DD"),
       sort: "start",
-      offset: (page + 1) * 10 - 10,
+    //  offset: (page + 1) * 10 - 10,
     };
     setUpComingEventsTableData(params);
 
